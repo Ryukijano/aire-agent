@@ -42,7 +42,7 @@ module load cuda/12.6.2
 module load miniforge/24.7.1
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate <env>
-export CPATH="${CUDA_HOME}/include:${CPATH:-}"
+export CPATH="${CUDA_HOME}/include${CPATH:+:${CPATH}}"
 export MAX_JOBS="${SLURM_CPUS_PER_TASK:-4}"
 pip install -e ".[dev]"
 python -c "import mypackage; print(mypackage.__file__)"
