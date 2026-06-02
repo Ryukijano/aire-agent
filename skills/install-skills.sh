@@ -25,6 +25,7 @@ for target in "${TARGETS[@]}"; do
     [[ -d "${skill_dir}" ]] || continue
     [[ -f "${skill_dir}/SKILL.md" ]] || continue
     name="$(basename "${skill_dir}")"
+    rm -rf "${target}/${name}"
     ln -sfn "$(cd "${skill_dir}" && pwd)" "${target}/${name}"
     echo "linked ${name} -> ${target}/"
     installed=$((installed + 1))
