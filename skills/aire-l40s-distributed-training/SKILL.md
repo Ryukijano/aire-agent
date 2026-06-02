@@ -71,7 +71,7 @@ torchrun --nproc_per_node=3 train.py
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:3
 export MASTER_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
-export MASTER_PORT=29500
+export MASTER_PORT=$(expr 10000 + ${SLURM_JOB_ID} % 20000)
 srun torchrun \
   --nnodes=${SLURM_NNODES} \
   --nproc_per_node=3 \
